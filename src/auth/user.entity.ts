@@ -1,5 +1,7 @@
+import { Exclude } from 'class-transformer';
 import { MaxLength, MinLength } from 'class-validator';
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Task } from 'src/tasks/tasks.entity';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class User {
@@ -15,4 +17,8 @@ export class User {
   @MinLength(8)
   @MaxLength(50)
   password: string;
+
+  @OneToMany((_type) => Task, (task) => task.user, { eager: true })
+  @Exclude({ toPlainOnly: true })
+  tasks: Task[];
 }
