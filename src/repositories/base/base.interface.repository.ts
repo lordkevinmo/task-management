@@ -37,6 +37,13 @@ interface BaseInterfaceRepository<E> {
   remove(id: string | number): Promise<DeleteResult>;
 
   /**
+   * Retrieves and deletes a specific data that matches a condition.
+   * @param filterCondition represents a specific criteria to match before retrieving a data structure.
+   * @returns a promise of a typeorm's DeleteResult type. See @type { DeleteResult } for definition.
+   */
+  removeByCondition(filterCondition: any): Promise<DeleteResult>;
+
+  /**
    * Searches specifics data belonging to a relationship with certains criteria.
    * @param relations represents a specific relationship between entities.
    * @returns a promise of the array of the data.

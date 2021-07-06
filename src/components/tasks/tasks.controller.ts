@@ -3,6 +3,7 @@ import {
   Controller,
   Delete,
   Get,
+  Inject,
   Param,
   Patch,
   Post,
@@ -12,16 +13,20 @@ import {
 import { AuthGuard } from '@nestjs/passport';
 import { GetUser } from '../auth/get-user.decorator';
 import { User } from '../auth/user.entity';
-import { CreateTaskDto } from './dtos/create-task.dto';
-import { GetTasksFilterDto } from './dtos/get-tasks-filter.dto';
-import { UpdateTaskDto } from './dtos/update-task.dto';
-import { Task } from './tasks.entity';
-import { TasksService } from './tasks.service';
+import { CreateTaskDto } from './dto/create-task.dto';
+import { GetTasksFilterDto } from './dto/get-tasks-filter.dto';
+import { UpdateTaskDto } from './dto/update-task.dto';
+import { Task } from './entity/tasks.entity';
+import { BaseTaskService } from './interface/task.service.interface';
 
 @Controller('tasks')
 @UseGuards(AuthGuard())
 export class TasksController {
-  constructor(private tasksService: TasksService) {}
+  constructor(
+    @Inject('BaseTaskService')
+    private readonly tasksService: BaseTaskService,
+  ) {}
+
   @Get()
   getTasks(
     @Query() filterDto: GetTasksFilterDto,

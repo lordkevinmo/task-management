@@ -1,6 +1,6 @@
 import { Exclude } from 'class-transformer';
 import { MaxLength, MinLength } from 'class-validator';
-import { Task } from '../tasks/tasks.entity';
+import { Task } from '../tasks/entity/tasks.entity';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()

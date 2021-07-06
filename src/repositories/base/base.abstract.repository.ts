@@ -28,6 +28,10 @@ abstract class BaseAbstractRepository<E> implements DatabaseHandleable<E> {
     return await this.entity.delete(id);
   }
 
+  async removeByCondition(filterCondition: any): Promise<DeleteResult> {
+    return await this.entity.delete(filterCondition);
+  }
+
   async findWithRelations(relations: any): Promise<E[]> {
     return await this.entity.find(relations);
   }
